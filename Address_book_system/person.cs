@@ -9,6 +9,9 @@ namespace Address_book_system
     internal class person
     {
         //uc1 create contact
+
+        public Dictionary<string, List<Person_Details>> group = new Dictionary<string, List<Person_Details>>();
+
         public static void createNewContact()
         {
             Person_Details contact = new Person_Details();
@@ -40,14 +43,20 @@ namespace Address_book_system
             program.details.Add(contact);
         }
 
-        public static void displayContacts()
+        public void displayContacts()
         {
             if (program.details.Count == 0)
             {
                 Console.WriteLine("Address book is empty.");
                 return;
             }
-            Console.WriteLine("List of contacts:\n");
+            Console.WriteLine("1.Total Contacts\n2.Group");
+            int choice = Convert.ToInt32(Console.ReadLine());
+
+            switch (choice)
+            {
+                case 1:
+                    Console.WriteLine("List of contacts:\n");
             foreach (var contact in program.details)
             {
                 Console.WriteLine("First Name: " + contact.first_Name);
@@ -60,6 +69,32 @@ namespace Address_book_system
                 Console.WriteLine("Email address: " + contact.email);
                 Console.WriteLine("--------------------------------------------------");
             }
+                    break;
+                case 2:
+                    foreach (string key in group.Keys)
+                    {
+                        Console.WriteLine(key);
+                    }
+
+                    Console.WriteLine("Enter group you want to display.");
+                    string gName = Console.ReadLine();
+                    List<Person_Details> list = group[gName];
+
+                    foreach (var contact in list)
+                    {
+                        Console.WriteLine("First Name: " + contact.first_Name);
+                        Console.WriteLine("Last Name: " + contact.last_Name);
+                        Console.WriteLine("Address: " + contact.address);
+                        Console.WriteLine("City: " + contact.city);
+                        Console.WriteLine("State: " + contact.state);
+                        Console.WriteLine("Zip Code: " + contact.zip);
+                        Console.WriteLine("Contact No.: " + contact.phone_Number);
+                        Console.WriteLine("Email address: " + contact.email);
+                        Console.WriteLine("--------------------------------------------------");
+                    }
+                    break;
+            }
+
 
         }
         //uc3 edit contact
@@ -132,7 +167,7 @@ namespace Address_book_system
             }
         }
         //uc5 add multiple person to address book
-        public static void addMultiContacts()
+        public void addMultiContacts()
         {
             Console.WriteLine("Number of contacts needed to add to the Address Book : ");
             int n = Convert.ToInt32(Console.ReadLine());
@@ -140,6 +175,21 @@ namespace Address_book_system
             {
                 createNewContact();
                 n--;
+            }
+        }
+        //uc6 Add multiple Address Book
+        public void addMultiAddressBooks()
+        {
+            Console.WriteLine("Number of address books need to add: ");
+            int noOfAddressBooks = Convert.ToInt32(Console.ReadLine());
+            while (noOfAddressBooks > 0)
+            {
+                Console.WriteLine("Enter group name:");
+                string gName = Console.ReadLine();
+                person people = new person();
+                people.addMultiContacts();
+                group.Add(gName, program.details.ToList());
+                noOfAddressBooks--;
             }
         }
     }
