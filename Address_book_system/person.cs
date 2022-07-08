@@ -8,6 +8,7 @@ namespace Address_book_system
 {
     internal class person
     {
+        //uc1 create contact
         public static void createNewContact()
         {
             Person_Details contact = new Person_Details();
@@ -35,6 +36,7 @@ namespace Address_book_system
             Console.WriteLine("Enter the Email Id : ");
             contact.email = Console.ReadLine();
 
+            // uc2 add contact
             program.details.Add(contact);
         }
 
@@ -60,6 +62,7 @@ namespace Address_book_system
             }
 
         }
+        //uc3 edit contact
         public static void editContact()
         {
             Console.WriteLine("Enter the name to edit the person's details : ");
@@ -114,7 +117,7 @@ namespace Address_book_system
             }
 
         }
-
+        //uc4 delete contact
         public static void deleteContact()
         {
             Console.WriteLine("Enter Name to delete the person's details: ");
@@ -126,6 +129,17 @@ namespace Address_book_system
                 {
                     program.details.Remove(contact);
                 }
+            }
+        }
+        //uc5 add multiple person to address book
+        public static void addMultiContacts()
+        {
+            Console.WriteLine("Number of contacts needed to add to the Address Book : ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            while (n > 0)
+            {
+                createNewContact();
+                n--;
             }
         }
     }
