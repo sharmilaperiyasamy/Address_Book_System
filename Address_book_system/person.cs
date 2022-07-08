@@ -114,5 +114,19 @@ namespace Address_book_system
             }
 
         }
+
+        public static void deleteContact()
+        {
+            Console.WriteLine("Enter Name to delete the person's details: ");
+            string name = Console.ReadLine();
+
+            foreach (var contact in program.details.ToList())
+            {
+                if (contact.first_Name.Equals(name))
+                {
+                    program.details.Remove(contact);
+                }
+            }
+        }
     }
 }

@@ -9,5 +9,7 @@ internal class program
         Address_book_system.person.displayContacts();
         Address_book_system.person.editContact();
         Address_book_system.person.displayContacts();
+        Address_book_system.person.deleteContact();
+        Address_book_system.person.displayContacts();
     }
 }
