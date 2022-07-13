@@ -13,6 +13,8 @@ namespace Address_book_system
 
         public Dictionary<string, List<Person_Details>> group = new Dictionary<string, List<Person_Details>>();
 
+        public Dictionary<string, List<string>> viewbyCity = new Dictionary<string, List<string>>();
+        public Dictionary<string, List<string>> viewByState = new Dictionary<string, List<string>>();
         public static void createNewContact()
         {
             Person_Details contact = new Person_Details();
@@ -212,7 +214,7 @@ namespace Address_book_system
                 List<Person_Details> state = details.FindAll(p => p.state.ToLower() == value.ToLower());
                 if (city.Count != 0)
                 {
-                    Console.WriteLine("All contacts in city {0} are:", value);
+                    Console.WriteLine("All contacts in city {0} are : ", value);
                     foreach (var contact in city)
                     {
                         Console.WriteLine("Name:{0} {1}", contact.first_Name, contact.last_Name);
@@ -220,7 +222,7 @@ namespace Address_book_system
                 }
                 else if (state.Count != 0)
                 {
-                    Console.WriteLine("All contacts in state {0} are:", value);
+                    Console.WriteLine("All contacts in state {0} are : ", value);
                     foreach (var contact in state)
                     {
                         Console.WriteLine("Name:{0} {1}", contact.first_Name, contact.last_Name);
@@ -229,6 +231,39 @@ namespace Address_book_system
                 else
                     Console.WriteLine("No contacts available in the required city or state");
             }
+        }
+        //uc9 view person by city or state
+        public void viewByCityOrState()
+        {
+            foreach (var key in group.Keys)
+            {
+                foreach (var item in group[key])
+                {
+
+                    if (viewbyCity.ContainsKey(item.city))
+                        viewbyCity[item.city].Add(item.first_Name + " " + item.last_Name);
+                    else
+                        viewbyCity.Add(item.city, new List<string>() { item.first_Name + " " + item.last_Name });
+                    if (viewByState.ContainsKey(item.state))
+                        viewByState[item.state].Add(item.first_Name + " " + item.last_Name);
+                    else
+                        viewByState.Add(item.state, new List<string>() { item.first_Name + " " + item.last_Name });
+                }
+            }
+            Console.WriteLine("Contacts by city:");
+            foreach (var key in viewbyCity.Keys)
+            {
+                Console.WriteLine("Contacts from city:" + key);
+                viewbyCity[key].ForEach(x => Console.WriteLine(x));
+
+            }
+            Console.WriteLine("Contacts by state:");
+            foreach (var key in viewByState.Keys)
+            {
+                Console.WriteLine("Contacts from state: " + key);
+                viewByState[key].ForEach(x => Console.WriteLine(x));
+            }
+
         }
     }
 }
