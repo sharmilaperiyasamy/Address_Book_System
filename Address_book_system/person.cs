@@ -334,5 +334,30 @@ namespace Address_book_system
                 }
             }
         }
+        //uc14 using CSV
+        public void writeToCSV()
+        {
+            string path = @"C:\Users\Lenovo\source\repos\Bridgelabz\Address_Book_System\Address_book_system\Person_Contacts.csv";
+            Console.WriteLine("FirstName, LastName, Address, City, Zip, Phone Number, Email (Use ',' as seperator)");
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine(Console.ReadLine());
+            File.AppendAllText(path, builder.ToString());
+        }
+
+        public void readFromCSV()
+        {
+            string path = @"C:\Users\Lenovo\source\repos\Bridgelabz\Address_Book_System\Address_book_system\Person_Contacts.csv";
+            string[] data = File.ReadAllLines(path);
+            string[] header = { "FirstName", "LastName", "Address", "City", "State", "Zip", "Phone Number", "Email" };
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                string[] details = data[i].Split(",");
+                for (int j = 0; j < details.Length; j++)
+                {
+                    Console.WriteLine(header[j] + ":" + details[j]);
+                }
+            }
+        }
     }
 }
