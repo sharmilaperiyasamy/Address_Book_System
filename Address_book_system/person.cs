@@ -12,7 +12,7 @@ namespace Address_book_system
         //uc1 create contact
 
         public Dictionary<string, List<Person_Details>> group = new Dictionary<string, List<Person_Details>>();
-        
+
         public static void createNewContact()
         {
             Person_Details contact = new Person_Details();
@@ -66,18 +66,18 @@ namespace Address_book_system
             {
                 case 1:
                     Console.WriteLine("List of contacts:\n");
-            foreach (var contact in details)
-            {
-                Console.WriteLine("First Name: " + contact.first_Name);
-                Console.WriteLine("Last Name: " + contact.last_Name);
-                Console.WriteLine("Address: " + contact.address);
-                Console.WriteLine("City: " + contact.city);
-                Console.WriteLine("State: " + contact.state);
-                Console.WriteLine("Zip Code: " + contact.zip);
-                Console.WriteLine("Contact No.: " + contact.phone_Number);
-                Console.WriteLine("Email address: " + contact.email);
-                Console.WriteLine("--------------------------------------------------");
-            }
+                    foreach (var contact in details)
+                    {
+                        Console.WriteLine("First Name: " + contact.first_Name);
+                        Console.WriteLine("Last Name: " + contact.last_Name);
+                        Console.WriteLine("Address: " + contact.address);
+                        Console.WriteLine("City: " + contact.city);
+                        Console.WriteLine("State: " + contact.state);
+                        Console.WriteLine("Zip Code: " + contact.zip);
+                        Console.WriteLine("Contact No.: " + contact.phone_Number);
+                        Console.WriteLine("Email address: " + contact.email);
+                        Console.WriteLine("--------------------------------------------------");
+                    }
                     break;
                 case 2:
                     foreach (string key in group.Keys)
@@ -199,6 +199,35 @@ namespace Address_book_system
                 people.addMultiContacts();
                 group.Add(gName, details.ToList());
                 noOfAddressBooks--;
+            }
+        }
+        //uc8 search person by city or state across multiple address book
+        public void searchPersonCityOrState()
+        {
+            Console.WriteLine("Enter the name of state or city to search the person :");
+            string value = Console.ReadLine();
+            foreach (var Person_Details in group.Values)
+            {
+                List<Person_Details> city = details.FindAll(p => p.city.ToLower() == value.ToLower());
+                List<Person_Details> state = details.FindAll(p => p.state.ToLower() == value.ToLower());
+                if (city.Count != 0)
+                {
+                    Console.WriteLine("All contacts in city {0} are:", value);
+                    foreach (var contact in city)
+                    {
+                        Console.WriteLine("Name:{0} {1}", contact.first_Name, contact.last_Name);
+                    }
+                }
+                else if (state.Count != 0)
+                {
+                    Console.WriteLine("All contacts in state {0} are:", value);
+                    foreach (var contact in state)
+                    {
+                        Console.WriteLine("Name:{0} {1}", contact.first_Name, contact.last_Name);
+                    }
+                }
+                else
+                    Console.WriteLine("No contacts available in the required city or state");
             }
         }
     }

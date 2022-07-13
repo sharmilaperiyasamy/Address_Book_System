@@ -3,11 +3,12 @@ internal class Program
 {
     public static void Main(String[] args)
     {
-        Console.WriteLine("1.Create new Contact\n2.Edit Contact\n3.Delete Contact\n4.Display Contacts\n5.Add Multiple Contacts\n6.Add Multiple Address Books\n7.Exit\n");
+        Console.WriteLine("1.Create new Contact\n2.Edit Contact\n3.Delete Contact\n4.Display Contacts" +
+            "\n5.Add Multiple Contacts\n6.Add Multiple Address Books\n7.Search name by City or State\n8.Exit\n");
         Console.WriteLine("Enter your choice:");
         int option = Convert.ToInt32(Console.ReadLine());
         Address_book_system.person books = new Address_book_system.person();
-        while (option != 7)
+        while (option != 8)
         {
             //Console.Clear();
 
@@ -31,12 +32,16 @@ internal class Program
                 case 6:
                     books.addMultiAddressBooks();
                     break;
+                case 7:
+                    books.searchPersonCityOrState();
+                    break;
                 default:
                     Console.Write("Enter valid option.\n");
                     break;
 
             }
-            Console.WriteLine("1.Create new Contact\n2.Edit Contact\n3.Delete Contact\n4.Display Contacts\n5.Add Multiple Contacts\n6.Add Multiple Address Books\n7.Exit\n");
+            Console.WriteLine("1.Create new Contact\n2.Edit Contact\n3.Delete Contact\n4.Display Contacts" +
+                "\n5.Add Multiple Contacts\n6.Add Multiple Address Books\n7.Search name by City or State\n8.Exit\n");
             Console.WriteLine("Enter your choice:");
             option = Convert.ToInt32(Console.ReadLine());
 
