@@ -265,5 +265,48 @@ namespace Address_book_system
             }
 
         }
+
+        //uc10 get number of persons i.e. count by state or city 
+        public void getCountContactpersons()
+        {
+            foreach (var key in group.Keys)
+            {
+                foreach (var item in group[key])
+                {
+
+                    if (viewbyCity.ContainsKey(item.city))
+                        viewbyCity[item.city].Add(item.first_Name + " " + item.last_Name);
+                    else
+                        viewbyCity.Add(item.city, new List<string>() { item.first_Name + " " + item.last_Name });
+                    if (viewByState.ContainsKey(item.state))
+                        viewByState[item.state].Add(item.first_Name + " " + item.last_Name);
+                    else
+                        viewByState.Add(item.state, new List<string>() { item.first_Name + " " + item.last_Name });
+                }
+            }
+            Console.WriteLine("No. of contacts by city.");
+            foreach (var key in viewbyCity.Keys)
+            {
+                Func<int, int> count = x =>
+                {
+                    foreach (var value in viewbyCity[key])
+                        x += 1;
+                    return x;
+                };
+                Console.WriteLine("Number of contacts in city " + key + " are " + count(0));
+            }
+            Console.WriteLine("Number of contacts by state.");
+            foreach (var key in viewByState.Keys)
+            {
+                Func<int, int> count = x =>
+                {
+                    foreach (var value in viewByState[key])
+                        x += 1;
+                    return x;
+                };
+                Console.WriteLine("No. of contacts in state " + key + " are " + count(0));
+            }
+
+        }
     }
 }
