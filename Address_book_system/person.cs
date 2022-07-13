@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace Address_book_system
 {
@@ -356,6 +358,33 @@ namespace Address_book_system
                 for (int j = 0; j < details.Length; j++)
                 {
                     Console.WriteLine(header[j] + ":" + details[j]);
+                }
+            }
+        }
+        //read/write operation in Json
+        public void JSONSerialization()
+        {
+            String path = @"C:\Users\Lenovo\source\repos\Bridgelabz\Address_Book_System\Address_book_system\Person_ContactsJSON.json";
+            addMultiAddressBooks();
+            var json = JsonConvert.SerializeObject(group);
+            File.WriteAllText(path, json);
+        }
+
+        public void JSONDeserialization()
+        {
+            String path = @"C:\Users\Lenovo\source\repos\Bridgelabz\Address_Book_System\Address_book_system\Person_ContactsJSON.json";
+            using StreamReader streamReader = new StreamReader(path);
+            {
+                string json = streamReader.ReadToEnd();
+                var jsonfile = JsonConvert.DeserializeObject<Dictionary<string, List<Person_Details>>>(json);
+                foreach (var ser in jsonfile)
+                {
+                    foreach (var data in ser.Value)
+                    {
+                        Console.WriteLine("FirstName: " + data.first_Name + "\nLastName: " + data.last_Name + "\nAddress: "
+                        + data.address + "\nCity: " + data.city + "\nState: " + data.state + "\nZip: "
+                        + data.zip + "\nPhoneNumber: " + data.phone_Number + "\nEmail: " + data.email + "\n");
+                    }
                 }
             }
         }

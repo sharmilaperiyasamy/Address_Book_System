@@ -13,6 +13,7 @@
 		</None>
 	</ItemGroup>	
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="NLog" Version="5.0.1" />
     <PackageReference Include="NLog.Config" Version="4.7.15" />
   </ItemGroup>
