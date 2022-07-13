@@ -1,8 +1,6 @@
 ﻿using Address_book_system;
-internal class program
+internal class Program
 {
-    public static List<Person_Details> details = new List<Person_Details>();
-
     public static void Main(String[] args)
     {
         Console.WriteLine("1.Create new Contact\n2.Edit Contact\n3.Delete Contact\n4.Display Contacts\n5.Add Multiple Contacts\n6.Add Multiple Address Books\n7.Exit\n");
@@ -11,7 +9,7 @@ internal class program
         Address_book_system.person books = new Address_book_system.person();
         while (option != 7)
         {
-            Console.Clear();
+            //Console.Clear();
 
             switch (option)
             {
