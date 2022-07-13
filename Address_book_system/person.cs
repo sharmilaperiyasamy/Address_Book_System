@@ -304,9 +304,35 @@ namespace Address_book_system
                         x += 1;
                     return x;
                 };
-                Console.WriteLine("No. of contacts in state " + key + " are " + count(0));
+                Console.WriteLine("Number of contacts in state " + key + " are " + count(0));
             }
+        }
+        //uc13 ability  to write or read the address Book with person contacts into file using fileIO
+        public void writeIntoFileUsingIO()
+        {
+            string path = @"C:\Users\Lenovo\source\repos\Bridgelabz\Address_Book_System\Address_book_system\Person_Contacts.txt";
+            Console.WriteLine("FirstName, LastName, Address, City, Zip, Phone Number, Email (Use ',' as seperator)");
+            using StreamWriter write = new StreamWriter(path);
+            {
+                write.WriteLine(Console.ReadLine());
+                write.Close();
+            }
+        }
 
+        public void readFromFileUsingIO()
+        {
+            string path = @"C:\Users\Lenovo\source\repos\Bridgelabz\Address_Book_System\Address_book_system\Person_Contacts.txt";
+            string[] data = File.ReadAllLines(path);
+            string[] header = { "FirstName", "LastName", "Address", "City", "State", "Zip", "Phone Number", "Email" };
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                string[] details = data[i].Split(",");
+                for (int j = 0; j < details.Length; j++)
+                {
+                    Console.WriteLine(header[j] + ":" + details[j]);
+                }
+            }
         }
     }
 }
